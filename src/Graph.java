@@ -1,13 +1,10 @@
 import java.util.*;
 
-// Graph using an adjacency list.
-// Each vertex has a list of the vertices it is connected to.
 public class Graph {
 
     private Map<String, List<String>> adjList = new LinkedHashMap<>();
     private boolean directed;
 
-    // info about the last traversal (used for performance comparison)
     private String lastAlgorithm = "None";
     private long lastSteps = 0;
     private long lastTimeNanos = 0;
@@ -32,7 +29,6 @@ public class Graph {
         return adjList.containsKey(v);
     }
 
-    // add a new vertex, returns false if it is already there
     public boolean addVertex(String v) {
         if (adjList.containsKey(v)) {
             return false;
@@ -41,7 +37,7 @@ public class Graph {
         return true;
     }
 
-    // add an edge, returns null if ok, or an error message if not
+
     public String addEdge(String from, String to) {
         if (!hasVertex(from)) {
             return "Vertex '" + from + "' does not exist.";
@@ -58,12 +54,12 @@ public class Graph {
 
         adjList.get(from).add(to);
         if (!directed) {
-            adjList.get(to).add(from);   // undirected, so add both ways
+            adjList.get(to).add(from);   
         }
         return null;
     }
 
-    // print every vertex with its neighbours
+    
     public void display() {
         if (isEmpty()) {
             System.out.println("The graph is empty.");
@@ -81,8 +77,7 @@ public class Graph {
         }
     }
 
-    // Breadth-First Search: visit level by level using a queue
-    // Time O(V + E)
+
     public List<String> bfs(String start) {
         if (!hasVertex(start)) {
             return null;
@@ -101,7 +96,7 @@ public class Graph {
         while (!queue.isEmpty()) {
             String current = queue.poll();
             order.add(current);
-            steps++;                        // vertex processed
+            steps++;                        
 
             for (String next : adjList.get(current)) {
                 steps++;                    // edge checked
@@ -116,8 +111,8 @@ public class Graph {
         return order;
     }
 
-    // Depth-First Search: go as deep as possible, then backtrack
-    // Time O(V + E)
+    
+    
     private long dfsSteps;
 
     public List<String> dfs(String start) {
@@ -139,10 +134,10 @@ public class Graph {
     private void dfsHelper(String current, Set<String> visited, List<String> order) {
         visited.add(current);
         order.add(current);
-        dfsSteps++;                         // vertex processed
+        dfsSteps++;                         
 
         for (String next : adjList.get(current)) {
-            dfsSteps++;                     // edge checked
+            dfsSteps++;                     
             if (!visited.contains(next)) {
                 dfsHelper(next, visited, order);
             }

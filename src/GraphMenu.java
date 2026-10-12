@@ -1,10 +1,8 @@
 import java.util.List;
 import java.util.Scanner;
 
-// Submenu for the graph part. Called from the main menu.
 public class GraphMenu {
 
-    // static so the graph is kept when user goes back to the main menu
     private static Graph graph = null;
 
     public static Graph getGraph() {
@@ -12,7 +10,7 @@ public class GraphMenu {
     }
 
     public static void run(Scanner scanner) {
-        // ask for graph type only the first time
+
         if (graph == null) {
             graph = new Graph(askDirected(scanner));
         }
@@ -96,7 +94,6 @@ public class GraphMenu {
         }
     }
 
-    // runs BFS if isBfs is true, otherwise DFS
     private static void traverse(Scanner scanner, boolean isBfs) {
         if (graph.isEmpty()) {
             System.out.println("Error: the graph is empty. Add vertices first.");
@@ -126,7 +123,7 @@ public class GraphMenu {
         }
     }
 
-    // keep asking until the user types a valid number
+
     private static int readInt(Scanner scanner, String message) {
         while (true) {
             System.out.print(message);
@@ -138,7 +135,7 @@ public class GraphMenu {
         }
     }
 
-    // keep asking until the user types something
+
     private static String readText(Scanner scanner, String message) {
         while (true) {
             System.out.print(message);

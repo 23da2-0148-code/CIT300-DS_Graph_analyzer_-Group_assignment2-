@@ -23,31 +23,51 @@ public class LinkedListMenu {
             choice = InputHelper.readIntInRange(scanner, "Enter your choice: ", 0, 7);
 
             switch (choice) {
-                case 1:
-                    list.insertAtFront(InputHelper.readInt(scanner, "Enter value to insert: "));
+                case 1: {
+                    int value = InputHelper.readInt(scanner, "Enter value to insert: ");
+                    long start = System.nanoTime();
+                    list.insertAtFront(value);
+                    long nanos = System.nanoTime() - start;
+                    ResultsLog.record("Linked List", "Insert at front", list.getLastSteps(), nanos);
                     System.out.println("Value inserted at the front.");
                     break;
-                case 2:
-                    list.insertAtEnd(InputHelper.readInt(scanner, "Enter value to insert: "));
+                }
+                case 2: {
+                    int value = InputHelper.readInt(scanner, "Enter value to insert: ");
+                    long start = System.nanoTime();
+                    list.insertAtEnd(value);
+                    long nanos = System.nanoTime() - start;
+                    ResultsLog.record("Linked List", "Insert at end", list.getLastSteps(), nanos);
                     System.out.println("Value inserted at the end.");
                     break;
-                case 3:
+                }
+                case 3: {
                     int toDelete = InputHelper.readInt(scanner, "Enter value to delete: ");
-                    if (list.deleteValue(toDelete)) {
+                    long start = System.nanoTime();
+                    boolean deleted = list.deleteValue(toDelete);
+                    long nanos = System.nanoTime() - start;
+                    ResultsLog.record("Linked List", "Delete value", list.getLastSteps(), nanos);
+                    if (deleted) {
                         System.out.println("Value " + toDelete + " deleted.");
                     } else {
                         System.out.println("Value " + toDelete + " was not found.");
                     }
                     break;
-                case 4:
+                }
+                case 4: {
                     int toFind = InputHelper.readInt(scanner, "Enter value to search: ");
+                    long start = System.nanoTime();
                     int index = list.search(toFind);
+                    long nanos = System.nanoTime() - start;
+                    ResultsLog.record("Linked List", "Search", list.getLastSteps(), nanos);
                     if (index == -1) {
-                        System.out.println("Value " + toFind + " was not found.");
+                        System.out.println("Value " + toFind + " was not found (" + list.getLastSteps() + " steps).");
                     } else {
-                        System.out.println("Value " + toFind + " found at position " + index + ".");
+                        System.out.println("Value " + toFind + " found at position " + index
+                                + " (" + list.getLastSteps() + " steps).");
                     }
                     break;
+                }
                 case 5:
                     list.display();
                     break;

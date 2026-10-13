@@ -14,7 +14,7 @@ public class Main {
             System.out.println("4. Graph Operations");
             System.out.println("5. Performance Comparison");
             System.out.println("6. View All Recorded Results");
-            // TODO: add Stack and Queue options once feature/stack-queue is merged
+          
             System.out.println("0. Exit");
             choice = InputHelper.readIntInRange(scanner, "Enter your choice: ", 0, 6);
 
